@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Auth View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="AuthView" id="Y6W-OH-hqX" customClass="AuthViewController" customModule="_ickboard" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="Y6W-OH-hqX" customClass="LoginViewController" customModule="_ickboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,7 +34,10 @@
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="sign in"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign in"/>
+                                <connections>
+                                    <action selector="didTapLoginButton:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="4LK-TL-ZSR"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD9-qo-XgS">
                                 <rect key="frame" x="40" y="227" width="17" height="21"/>
@@ -49,10 +52,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f09-ud-aEM">
-                                <rect key="frame" x="273" y="457" width="80" height="35"/>
+                                <rect key="frame" x="271" y="457" width="82" height="35"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="sign up"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign up"/>
                                 <connections>
                                     <segue destination="c14-4b-DsK" kind="presentation" id="rkC-au-7Hj"/>
                                 </connections>
@@ -88,6 +91,11 @@
                             <constraint firstItem="f09-ud-aEM" firstAttribute="top" secondItem="0CO-R7-ZIb" secondAttribute="bottom" constant="30" id="wDV-Pi-fzZ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="idTextField" destination="Sc5-d2-Aje" id="7hu-v4-st3"/>
+                        <outlet property="passwordTextField" destination="0CO-R7-ZIb" id="ddt-OK-vgZ"/>
+                        <outlet property="signinButton" destination="hQP-ol-TAq" id="gY8-We-MhW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -165,7 +173,7 @@
                                 <rect key="frame" x="40" y="561" width="313" height="32"/>
                                 <segments>
                                     <segment title="I have it"/>
-                                    <segment title="I don't have it"/>
+                                    <segment title="I Don't have it"/>
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p3O-Dc-upc">
@@ -173,7 +181,7 @@
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Sign up"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QEw-Zd-Zcl"/>
