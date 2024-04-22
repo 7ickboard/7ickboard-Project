@@ -9,7 +9,7 @@ import UIKit
 
 final class UserModel {
     struct User {
-        var email: String
+        var id: String
         var password: String
         var name: String
         var telephone: String
@@ -17,7 +17,7 @@ final class UserModel {
     }
     
     var users: [User] = [
-        User(email: "test1234", password: "test1234", name: "test" , telephone: "010-1234-5678", driversLicense: true),
+        User(id: "test1234", password: "test1234", name: "test" , telephone: "010-1234-5678", driversLicense: true),
     ]
     
     // 비밀번호 형식 검사
