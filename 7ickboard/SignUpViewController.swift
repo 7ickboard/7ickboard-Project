@@ -91,9 +91,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             print(userModel.users)
             let selectedIndex = licenseSegmentedControl.selectedSegmentIndex
             let isLicensed = selectedIndex == 0 ? true : false
-            let users = UserModel.User(id: id, password: pw, name: name, telephone: tp, driversLicense: isLicensed)
-            self.userModel.addUser(user: users)
-            self.userModel.users = userModel.users
+            let user = UserModel.User(id: id, password: pw, name: name, telephone: tp, driversLicense: isLicensed)
+            var users = UserDefaults.standard.array(forKey: "users") as? [Data] ?? []
+            if let encodedUser = try? JSONEncoder().encode(user) {
+                users.append(encodedUser)
+                UserDefaults.standard.set(users, forKey: "users")
+            }
+            
             print(userModel.users)
             makeSuccessAlert()
             

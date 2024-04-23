@@ -8,7 +8,7 @@
 import UIKit
 
 final class UserModel {
-    struct User {
+    struct User: Encodable {
         var id: String
         var password: String
         var name: String
