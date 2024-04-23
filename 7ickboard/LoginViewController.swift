@@ -37,6 +37,10 @@ class LoginViewController: UIViewController {
         signinButton.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+         self.view.endEditing(true)
+   }
+    
     
     @objc func didEndOnExit(_ sender: UITextField) {
         if idTextField.isFirstResponder {
@@ -55,22 +59,27 @@ class LoginViewController: UIViewController {
     
     //로그인 버튼
     @IBAction func didTapLoginButton(_ sender: UIButton) {
-        guard let id = idTextField.text, !id.isEmpty else { return }
-        guard let password = passwordTextField.text, !password.isEmpty else { return }
-        
-        if userModel.isValidPassword(pwd: password) {
-            if let removable = self.view.viewWithTag(101) {
-                removable.removeFromSuperview()
-            }
+        guard let id = idTextField.text, !id.isEmpty else {
+            print("로그인 실패")
+            let alert = UIAlertController(title: "로그인 실패", message: "아이디가 없습니다.", preferredStyle: .alert)
+            let okAlert = UIAlertAction(title: "확인", style: .cancel)
+            alert.addAction(okAlert)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        guard let password = passwordTextField.text, !password.isEmpty else {
+            print("로그인 실패")
+            let alert = UIAlertController(title: "로그인 실패", message: "비밀번호가 없습니다.", preferredStyle: .alert)
+            let okAlert = UIAlertAction(title: "확인", style: .cancel)
+            alert.addAction(okAlert)
+            present(alert, animated: true, completion: nil)
+            return
         }
         
         if userModel.isValidPassword(pwd: password) {
             let loginSuccess: Bool = loginCheck(id: id, pwd: password)
             if loginSuccess {
                 print("로그인 성공")
-                if let removable = self.view.viewWithTag(102) {
-                    removable.removeFromSuperview()
-                }
                 self.performSegue(withIdentifier: "이동할 클래스", sender: self)
             } else {
                 print("로그인 실패")

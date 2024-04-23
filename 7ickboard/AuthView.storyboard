@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="140" y="5"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="SvH-dG-7XZ">
             <objects>
-                <viewController id="c14-4b-DsK" sceneMemberID="viewController">
+                <viewController id="c14-4b-DsK" customClass="SignUpViewController" customModule="_ickboard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uhf-Qf-i5m">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,6 +182,9 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Sign up"/>
+                                <connections>
+                                    <action selector="signupButton:" destination="c14-4b-DsK" eventType="touchUpInside" id="PFr-uX-gbC"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="QEw-Zd-Zcl"/>
@@ -225,6 +228,13 @@
                             <constraint firstItem="9Q8-WY-VYY" firstAttribute="top" secondItem="saR-Fe-rHg" secondAttribute="bottom" constant="10" id="yzz-RT-19Q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="idTextField" destination="SeM-OO-apC" id="eCo-rV-evF"/>
+                        <outlet property="licenseSegmentedControl" destination="YVZ-UZ-g70" id="Dm1-vg-oTU"/>
+                        <outlet property="nameTextField" destination="sNg-M6-LHf" id="ZSq-tC-K9b"/>
+                        <outlet property="passwordTextField" destination="U5e-Jb-caa" id="3lL-xV-JJf"/>
+                        <outlet property="telephoneTextField" destination="9Q8-WY-VYY" id="fNa-JS-ZVN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QjW-LR-PpB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
