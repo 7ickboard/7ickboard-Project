@@ -10,6 +10,8 @@
 		2BC950922BD6832500B581E8 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC950912BD6832500B581E8 /* MyPageViewController.swift */; };
 		2BC950942BD6833F00B581E8 /* MyPageStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BC950932BD6833F00B581E8 /* MyPageStoryboard.storyboard */; };
 		2BC950962BD684FE00B581E8 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC950952BD684FE00B581E8 /* TestData.swift */; };
+		2BE2F97D2BD7811D00D3A799 /* MyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE2F97B2BD7811D00D3A799 /* MyPageTableViewCell.swift */; };
+		2BE2F97E2BD7811D00D3A799 /* MyPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BE2F97C2BD7811D00D3A799 /* MyPageTableViewCell.xib */; };
 		4DC149A02BD617C4004FF0AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1499F2BD617C4004FF0AB /* AppDelegate.swift */; };
 		4DC149A22BD617C4004FF0AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */; };
 		4DC149A42BD617C4004FF0AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149A32BD617C4004FF0AB /* ViewController.swift */; };
@@ -22,6 +24,8 @@
 		2BC950912BD6832500B581E8 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		2BC950932BD6833F00B581E8 /* MyPageStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyPageStoryboard.storyboard; sourceTree = "<group>"; };
 		2BC950952BD684FE00B581E8 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
+		2BE2F97B2BD7811D00D3A799 /* MyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageTableViewCell.swift; sourceTree = "<group>"; };
+		2BE2F97C2BD7811D00D3A799 /* MyPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyPageTableViewCell.xib; sourceTree = "<group>"; };
 		4DC1499C2BD617C4004FF0AB /* 7ickboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 7ickboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC1499F2BD617C4004FF0AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +76,8 @@
 				2BC950912BD6832500B581E8 /* MyPageViewController.swift */,
 				2BC950932BD6833F00B581E8 /* MyPageStoryboard.storyboard */,
 				2BC950952BD684FE00B581E8 /* TestData.swift */,
+				2BE2F97B2BD7811D00D3A799 /* MyPageTableViewCell.swift */,
+				2BE2F97C2BD7811D00D3A799 /* MyPageTableViewCell.xib */,
 			);
 			path = 7ickboard;
 			sourceTree = "<group>";
@@ -135,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DC149A92BD617C5004FF0AB /* Assets.xcassets in Resources */,
+				2BE2F97E2BD7811D00D3A799 /* MyPageTableViewCell.xib in Resources */,
 				4DC149AC2BD617C5004FF0AB /* Base in Resources */,
 				2BC950942BD6833F00B581E8 /* MyPageStoryboard.storyboard in Resources */,
 				4DC149A72BD617C4004FF0AB /* Base in Resources */,
@@ -152,6 +159,7 @@
 				4DC149A02BD617C4004FF0AB /* AppDelegate.swift in Sources */,
 				4DC149A22BD617C4004FF0AB /* SceneDelegate.swift in Sources */,
 				2BC950962BD684FE00B581E8 /* TestData.swift in Sources */,
+				2BE2F97D2BD7811D00D3A799 /* MyPageTableViewCell.swift in Sources */,
 				2BC950922BD6832500B581E8 /* MyPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,7 +316,7 @@
 				INFOPLIST_FILE = 7ickboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = MyPageStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -336,7 +344,7 @@
 				INFOPLIST_FILE = 7ickboard/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = MyPageStoryboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
