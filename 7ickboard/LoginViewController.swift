@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
             let loginSuccess: Bool = loginCheck(id: id, pwd: password)
             if loginSuccess {
                 print("로그인 성공")
-                self.performSegue(withIdentifier: "이동할 클래스", sender: self)
+                self.performSegue(withIdentifier: "", sender: self)
             } else {
                 print("로그인 실패")
                 makeAlert(for: "비밀번호")

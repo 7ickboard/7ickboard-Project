@@ -141,7 +141,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         case nameTextField:
             telephoneTextField.becomeFirstResponder()
         default:
-            textField.resignFirstResponder() // 키보드를 숨깁니다.
+            textField.resignFirstResponder()
         }
         return true
     }
