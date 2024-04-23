@@ -60,19 +60,11 @@ class LoginViewController: UIViewController {
     //로그인 버튼
     @IBAction func didTapLoginButton(_ sender: UIButton) {
         guard let id = idTextField.text, !id.isEmpty else {
-            print("로그인 실패")
-            let alert = UIAlertController(title: "로그인 실패", message: "아이디가 없습니다.", preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "확인", style: .cancel)
-            alert.addAction(okAlert)
-            present(alert, animated: true, completion: nil)
+            makeAlert(for: "아이디")
             return
         }
         guard let password = passwordTextField.text, !password.isEmpty else {
-            print("로그인 실패")
-            let alert = UIAlertController(title: "로그인 실패", message: "비밀번호가 없습니다.", preferredStyle: .alert)
-            let okAlert = UIAlertAction(title: "확인", style: .cancel)
-            alert.addAction(okAlert)
-            present(alert, animated: true, completion: nil)
+            makeAlert(for: "비밀번호")
             return
         }
         
@@ -83,11 +75,16 @@ class LoginViewController: UIViewController {
                 self.performSegue(withIdentifier: "이동할 클래스", sender: self)
             } else {
                 print("로그인 실패")
-                let alert = UIAlertController(title: "로그인 실패", message: "아이디나 비밀번호가 다릅니다.", preferredStyle: .alert)
-                let okAlert = UIAlertAction(title: "확인", style: .cancel)
-                alert.addAction(okAlert)
-                present(alert, animated: true, completion: nil)
+                makeAlert(for: "비밀번호")
             }
         }
+    }
+    
+    func makeAlert(for item: String) {
+        print("로그인 실패")
+        let alert = UIAlertController(title: "로그인 실패", message: "\(item)이(가) 없거나 다릅니다.", preferredStyle: .alert)
+        let okAlert = UIAlertAction(title: "확인", style: .cancel)
+        alert.addAction(okAlert)
+        present(alert, animated: true, completion: nil)
     }
 }

@@ -33,4 +33,9 @@ final class UserModel {
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
         return phoneTest.evaluate(with: phone)
     }
+    
+    // 회원 추가
+    func addUser(user: User) {
+        users.append(user)
+    }
 }

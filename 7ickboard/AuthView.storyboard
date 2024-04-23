@@ -91,6 +91,7 @@
                             <constraint firstItem="f09-ud-aEM" firstAttribute="top" secondItem="0CO-R7-ZIb" secondAttribute="bottom" constant="30" id="wDV-Pi-fzZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="8QF-vh-2gv"/>
                     <connections>
                         <outlet property="idTextField" destination="Sc5-d2-Aje" id="7hu-v4-st3"/>
                         <outlet property="passwordTextField" destination="0CO-R7-ZIb" id="ddt-OK-vgZ"/>
