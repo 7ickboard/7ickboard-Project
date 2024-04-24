@@ -16,9 +16,21 @@ final class UserModel {
         var driversLicense: Bool
     }
     
-    var users: [User] = [
-        User(id: "test1234", password: "test1234", name: "test" , telephone: "010-1234-5678", driversLicense: true),
-    ]
+    var users: [User]
+    
+    init() {
+        // UserDefaults에서 저장된 사용자 데이터를 불러오기
+        if let userData = UserDefaults.standard.data(forKey: "userData") {
+            if let decodedData = try? JSONDecoder().decode([User].self, from: userData) {
+                self.users = decodedData
+                return
+            }
+        }
+        // 저장된 사용자 데이터가 없을 경우, 기본값 설정
+        self.users = [
+            User(id: "test1234", password: "test1234", name: "test" , telephone: "010-1234-5678", driversLicense: true)
+        ]
+    }
     
     // 비밀번호 형식 검사
     func isValidPassword(pwd: String) -> Bool {
@@ -37,5 +49,23 @@ final class UserModel {
     // 회원 추가
     func addUser(user: User) {
         users.append(user)
+        save() // 변경사항을 저장
+    }
+    
+    // 사용자 데이터를 UserDefaults에 저장
+    func save() {
+        if let encodedData = try? JSONEncoder().encode(users) {
+            UserDefaults.standard.set(encodedData, forKey: "userData")
+        }
+    }
+    
+    func removeUser(withId id: String) {
+        users = users.filter { $0.id != id }
+        save() // 변경사항을 저장
+    }
+    
+    func removeAllUsers() {
+        users = []
+        save() // 변경사항을 저장
     }
 }

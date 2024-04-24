@@ -21,11 +21,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         setTextField()
         setSegmentedControl()
+        hideKeyboard()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        self.view.endEditing(true)
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+//        self.view.endEditing(true)
+//    }
     
     func setTextField() {
         idTextField.placeholder = "id를 입력해주세요"
@@ -88,19 +89,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         if userModel.isValidPassword(pwd: pw) && userModel.isValidTelephone(phone: tp) {
             print("회원가입 성공")
-            print(userModel.users)
             let selectedIndex = licenseSegmentedControl.selectedSegmentIndex
             let isLicensed = selectedIndex == 0 ? true : false
             let user = UserModel.User(id: id, password: pw, name: name, telephone: tp, driversLicense: isLicensed)
-            var users = UserDefaults.standard.array(forKey: "users") as? [Data] ?? []
-            if let encodedUser = try? JSONEncoder().encode(user) {
-                users.append(encodedUser)
-                UserDefaults.standard.set(users, forKey: "users")
-            }
-            
+            print(userModel.users)
+            userModel.removeAllUsers()
+            print(userModel.users)
+            userModel.addUser(user: user)
             print(userModel.users)
             makeSuccessAlert()
-            
         } else {
             makeSignUpCheckAlert()
         }
@@ -125,7 +122,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     func makeSuccessAlert() {
         print("회원가입 성공")
         let alert = UIAlertController(title: "회원가입 성공", message: "환영합니다. 로그인 해주세요", preferredStyle: .alert)
-        let okAlert = UIAlertAction(title: "확인", style: .default) {_ in 
+        let okAlert = UIAlertAction(title: "확인", style: .default) {_ in
             self.dismiss(animated: true)
         }
         alert.addAction(okAlert)

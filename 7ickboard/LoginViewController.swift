@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
         setIdTextField()
         setPasswordTextField()
         setSigninButton()
+        setIdPassword()
+        hideKeyboard()
     }
     
     func setIdTextField() {
@@ -37,9 +39,9 @@ class LoginViewController: UIViewController {
         signinButton.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-   }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+//         self.view.endEditing(true)
+//   }
     
     
     @objc func didEndOnExit(_ sender: UITextField) {
@@ -49,6 +51,7 @@ class LoginViewController: UIViewController {
     }
     
     func loginCheck(id: String, pwd: String) -> Bool {
+        let userModel = UserModel()
         for user in userModel.users {
             if user.id == id && user.password == pwd {
                 return true // 로그인 성공
@@ -72,7 +75,12 @@ class LoginViewController: UIViewController {
             let loginSuccess: Bool = loginCheck(id: id, pwd: password)
             if loginSuccess {
                 print("로그인 성공")
-                self.performSegue(withIdentifier: "", sender: self)
+                UserDefaults.standard.set(id, forKey: "loggedInUserId")
+                UserDefaults.standard.set(password, forKey: "loggedInUserPassword")
+                let storyboard = UIStoryboard(name: "Main", bundle: .main)
+                if let viewController = storyboard.instantiateViewController(withIdentifier: "Main") as? ViewController {
+                    self.navigationController?.pushViewController(viewController, animated: true)
+                }
             } else {
                 print("로그인 실패")
                 makeAlert(for: "비밀번호")
@@ -86,5 +94,12 @@ class LoginViewController: UIViewController {
         let okAlert = UIAlertAction(title: "확인", style: .cancel)
         alert.addAction(okAlert)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func setIdPassword() {
+        if let savedId = UserDefaults.standard.string(forKey: "loggedInUserId"), let savedPassword = UserDefaults.standard.string(forKey: "loggedInUserPassword") {
+            idTextField.text = savedId
+            passwordTextField.text = savedPassword
+        }
     }
 }
