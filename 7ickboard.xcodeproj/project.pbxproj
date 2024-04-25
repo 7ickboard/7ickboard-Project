@@ -75,11 +75,11 @@
 				1179196F2BD7E76600401A45 /* RegisterViewController.swift */,
 				116D808C2BD8E873008E619C /* KickBoard.swift */,
 				116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */,
+				116506D22BD674DB009E7525 /* TabBarController.swift */,
 				4DC149A52BD617C4004FF0AB /* Main.storyboard */,
 				4DC149A82BD617C5004FF0AB /* Assets.xcassets */,
 				4DC149AA2BD617C5004FF0AB /* LaunchScreen.storyboard */,
 				4DC149AD2BD617C5004FF0AB /* Info.plist */,
-				116506D22BD674DB009E7525 /* TabBarController.swift */,
 			);
 			path = 7ickboard;
 			sourceTree = "<group>";

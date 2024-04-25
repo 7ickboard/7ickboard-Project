@@ -14,6 +14,8 @@ class MapViewController: UIViewController {
         }
     }
 
+    var ridingTime: (Date?, Date?)
+
     var occupiedAnnotation: KickBoardAnnotation?
 
     var mapView = MKMapView()
@@ -120,6 +122,10 @@ class MapViewController: UIViewController {
         let annotation = KickBoardAnnotation(id: occupiedAnnotation!.id, coordinate: locationManager.location!.coordinate)
         KickBoard.kickboards.append(KickBoard(id: occupiedAnnotation!.id, name: "", latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude))
         isRiding = false
+        ridingTime.1 = Date()
+
+        //adding ridingTime to User
+
         occupiedAnnotation = nil
 
         mapView.addAnnotation(annotation)
@@ -130,6 +136,8 @@ class MapViewController: UIViewController {
         debugPrint(#function)
         occupyingBicycleButton.removeFromSuperview()
         isRiding = true
+
+        ridingTime.0 = Date()
 
         KickBoard.kickboards.remove(at: KickBoard.kickboards.firstIndex(where: { kickboard in
             kickboard.id == occupiedAnnotation!.id
