@@ -10,6 +10,8 @@ import UIKit
 class MyPageViewController: UIViewController, UITableViewDataSource {
     
     var userModel = UserModel()
+    // KickBoard 객체의 배열 선언
+    var kickboards: [KickBoard] = []
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == historyTableView {
@@ -17,22 +19,24 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
         } else if tableView == registeredTableView {
             return array2.count
         }
-        return 0
+        return kickboards.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == historyTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
+            let kickboard = kickboards[indexPath.row]
 //            let users = self.userModel[indexPath.row]
 //            let id = users.name
 //            let title = users.telephone
 //                    cell.textLabel?.text = "[\(id)] \(title)"
                     return cell
      //       cell.titleLabel.text = userModel.users[indexPath.row]
-        //    return cell
+       // return cell
         } else if tableView == registeredTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
+            let kickboard = kickboards[indexPath.row]
             cell.titleLabel.text = array2[indexPath.row]
             return cell
         }
@@ -69,6 +73,10 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
         registeredTableView.register(UINib(nibName: "MyPageTableViewCell", bundle: nil), forCellReuseIdentifier: "MyPageTableViewCell")
         historyTableView.dataSource = self
         registeredTableView.dataSource = self
+        // KickBoard 객체 생성, kickboards 배열에 추가
+        let kickboard1 = KickBoard(name: "Kickboard 1", latitude: Double(), longitude: Double())
+        let kickboard2 = KickBoard(name: "Kickboard 2", latitude: Double(), longitude: Double())
+        kickboards = [kickboard1, kickboard2]
         
         let a = UserModel().users[0]
         nameTextField.text = a.name
@@ -79,9 +87,8 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
         } else {
             licenseTextField.text = "미인증"
         }
-        
-     
     }
+ 
     @IBAction func logoutButton(_ sender: UIButton) {
       guard let nextVC = self.storyboard? .instantiateViewController( identifier: "" ) else { return }
         self.navigationController?.popToRootViewController(animated: true)
