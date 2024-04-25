@@ -23,6 +23,10 @@
 		4DC149A72BD617C4004FF0AB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4DC149A62BD617C4004FF0AB /* Base */; };
 		4DC149A92BD617C5004FF0AB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DC149A82BD617C5004FF0AB /* Assets.xcassets */; };
 		4DC149AC2BD617C5004FF0AB /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4DC149AB2BD617C5004FF0AB /* Base */; };
+		4DC149B82BD640F8004FF0AB /* AuthView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DC149B72BD640F8004FF0AB /* AuthView.storyboard */; };
+		4DC149BA2BD641AC004FF0AB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149B92BD641AC004FF0AB /* LoginViewController.swift */; };
+		4DC149BC2BD64AE0004FF0AB /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149BB2BD64AE0004FF0AB /* UserModel.swift */; };
+		4DC149BE2BD64C13004FF0AB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149BD2BD64C13004FF0AB /* SignUpViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +47,10 @@
 		4DC149A82BD617C5004FF0AB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DC149AB2BD617C5004FF0AB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DC149AD2BD617C5004FF0AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DC149B72BD640F8004FF0AB /* AuthView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AuthView.storyboard; sourceTree = "<group>"; };
+		4DC149B92BD641AC004FF0AB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4DC149BB2BD64AE0004FF0AB /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		4DC149BD2BD64C13004FF0AB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +100,7 @@
 				116D80922BDA55EA008E619C /* LoginViewController.swift */,
 				116D80932BDA55EA008E619C /* SignUpViewController.swift */,
 				116D80902BDA55EA008E619C /* UserModel.swift */,
+
 			);
 			path = 7ickboard;
 			sourceTree = "<group>";
@@ -164,6 +173,7 @@
 				4DC149AC2BD617C5004FF0AB /* Base in Resources */,
 				4DC149A72BD617C4004FF0AB /* Base in Resources */,
 				116D80952BDA55EA008E619C /* AuthView.storyboard in Resources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,6 +187,7 @@
 				116D80972BDA55EA008E619C /* SignUpViewController.swift in Sources */,
 				116D808F2BD8FB42008E619C /* KickBoardAnnotation.swift in Sources */,
 				116506D32BD674DB009E7525 /* TabBarController.swift in Sources */,
+
 				4DC149A42BD617C4004FF0AB /* ViewController.swift in Sources */,
 				117919702BD7E76600401A45 /* RegisterViewController.swift in Sources */,
 				116D808D2BD8E873008E619C /* KickBoard.swift in Sources */,

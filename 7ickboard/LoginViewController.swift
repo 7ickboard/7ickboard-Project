@@ -81,8 +81,10 @@ class LoginViewController: UIViewController {
                 print("로그인 성공")
                 UserDefaults.standard.set(id, forKey: "loggedInUserId")
                 UserDefaults.standard.set(password, forKey: "loggedInUserPassword")
-                let tabBarController = TabBarController()
+
+              let tabBarController = TabBarController()
                     self.navigationController?.pushViewController(tabBarController, animated: true)
+
             } else {
                 print("로그인 실패")
                 makeAlert(for: "비밀번호")
