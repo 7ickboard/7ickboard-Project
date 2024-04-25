@@ -6,53 +6,145 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    var isRiding = false {
+        willSet(newValue) {
+            newValue ?
+            containerStackView.addArrangedSubview(returnBicycleButton) :
+            returnBicycleButton.removeFromSuperview()
+        }
+    }
+
+    var occupiedAnnotation: KickBoardAnnotation?
+
     var mapView = MKMapView()
 
     let locationManager = CLLocationManager()
 
+    let containerStackView: UIStackView = {
+        let stackView = UIStackView()
+
+        stackView.backgroundColor = .darkGray
+
+        return stackView
+    }()
+
+    let goToMyLocationButton: UIButton = {
+        let btn = UIButton()
+
+        btn.setImage(UIImage(systemName: "scope"), for: .normal)
+        btn.backgroundColor = .lightGray
+
+        return btn
+    }()
+
+    lazy var returnBicycleButton: UIButton = {
+        let btn = UIButton()
+
+        btn.setTitle("반납하기", for: .normal)
+        btn.backgroundColor = .gray
+        btn.addTarget(self, action: #selector(returnMyBicycle), for: .touchUpInside)
+
+        return btn
+    }()
+
+    lazy var occupyingBicycleButton: UIButton = {
+        let btn = UIButton()
+
+        btn.setTitle("이용하기", for: .normal)
+        btn.backgroundColor = .gray
+        btn.addTarget(self, action: #selector(occupyingBicycle), for: .touchUpInside)
+
+        return btn
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        createAnnotaions()
-        setupMapView()
         setUpUI()
         setConstraints()
+
+        setupMapView()
         findMyLocation()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         createAnnotaions()
     }
 
     private func setUpUI() {
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        containerStackView.translatesAutoresizingMaskIntoConstraints = false
+        goToMyLocationButton.translatesAutoresizingMaskIntoConstraints = false
+        returnBicycleButton.translatesAutoresizingMaskIntoConstraints = false
+        occupyingBicycleButton.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(mapView)
+        view.addSubview(goToMyLocationButton)
+        view.addSubview(containerStackView)
 
-        let coordinate = CLLocationCoordinate2D(latitude: 37.27543611,
-                                                      longitude: 127.4432194)
-        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
-        mapView.setRegion(region, animated: true)
-
+        goToMyLocationButton.addTarget(self, action: #selector(findMyLocation), for: .touchUpInside)
     }
 
     private func setConstraints() {
-        mapView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+        mapView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        goToMyLocationButton.snp.makeConstraints {
+            $0.height.equalTo(28)
+            $0.width.equalTo(28)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.bottom.equalTo(containerStackView.snp.top).offset(-10)
+        }
+
+        containerStackView.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.height.greaterThanOrEqualTo(0)
         }
     }
 
+    @objc
     func findMyLocation() {
+        debugPrint(#function)
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
     }
 
-    func createAnnotaions() {
-        let annotation = MKPointAnnotation()
+    @objc
+    func returnMyBicycle() {
+        debugPrint(#function)
 
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 37.51818789942772, longitude: 126.88541765534976)
+        let annotation = KickBoardAnnotation(id: occupiedAnnotation!.id, coordinate: locationManager.location!.coordinate)
+        KickBoard.kickboards.append(KickBoard(id: occupiedAnnotation!.id, name: "", latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude))
+        isRiding = false
+        occupiedAnnotation = nil
 
-        annotation.title = "HOTDOG"
-        annotation.subtitle = "세상에서 가장 맛있는 핫도그 가게"
-
-        // 맵뷰에 Annotaion 추가
         mapView.addAnnotation(annotation)
+    }
+
+    @objc
+    func occupyingBicycle() {
+        debugPrint(#function)
+        occupyingBicycleButton.removeFromSuperview()
+        isRiding = true
+
+        KickBoard.kickboards.remove(at: KickBoard.kickboards.firstIndex(where: { kickboard in
+            kickboard.id == occupiedAnnotation!.id
+        })!)
+        mapView.removeAnnotation(occupiedAnnotation!)
+    }
+
+    func createAnnotaions() {
+        mapView.removeAnnotations(mapView.annotations)
+
+        KickBoard.kickboards.forEach { kickboard in
+            let annotation = KickBoardAnnotation(id: kickboard.id, coordinate: kickboard.coordinate2D)
+
+            mapView.addAnnotation(annotation)
+        }
     }
 }
 
@@ -140,6 +232,11 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
     func setupMapView() {
         mapView.delegate = self
         locationManager.delegate = self
+
+        let coordinate = CLLocationCoordinate2D(latitude: 37.27543611,
+                                                longitude: 127.4432194)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -149,18 +246,35 @@ extension MapViewController: MKMapViewDelegate, CLLocationManagerDelegate {
 
         var annotationView = self.mapView.dequeueReusableAnnotationView(withIdentifier: "Custom")
 
-        if annotationView == nil {
-            annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
-            annotationView?.canShowCallout = true
-            annotationView?.image = UIImage(systemName: "person.fill")
-        }
+
+        let markerView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "Custom")
+        markerView.markerTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+        markerView.glyphTintColor = #colorLiteral(red: 0.5843137503, green: 0.8235294223, blue: 0.4196078479, alpha: 1)
+
+        markerView.glyphImage = UIImage(systemName: "bicycle.circle.fill")
+
+
+        annotationView = markerView
+        annotationView?.canShowCallout = false
+
 
         return annotationView
     }
 
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
     {
-        debugPrint("annotaion tapped")
+        if !isRiding {
+            occupiedAnnotation = (view.annotation as! KickBoardAnnotation)
+            containerStackView.addArrangedSubview(occupyingBicycleButton)
+        }
+        debugPrint("annotaion selected")
+    }
+
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView)
+    {
+        occupyingBicycleButton.removeFromSuperview()
+
+        debugPrint("annotaion deselected")
     }
 
 }

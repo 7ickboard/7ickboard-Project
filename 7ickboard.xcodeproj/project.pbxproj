@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		116506CC2BD61905009E7525 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116506CB2BD61905009E7525 /* MapViewController.swift */; };
-		116506CE2BD6218A009E7525 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116506CD2BD6218A009E7525 /* MapView.swift */; };
 		116506D12BD621DE009E7525 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 116506D02BD621DE009E7525 /* SnapKit */; };
 		116506D32BD674DB009E7525 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116506D22BD674DB009E7525 /* TabBarController.swift */; };
+		116D808D2BD8E873008E619C /* KickBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116D808C2BD8E873008E619C /* KickBoard.swift */; };
+		116D808F2BD8FB42008E619C /* KickBoardAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */; };
+		117919702BD7E76600401A45 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1179196F2BD7E76600401A45 /* RegisterViewController.swift */; };
 		4DC149A02BD617C4004FF0AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC1499F2BD617C4004FF0AB /* AppDelegate.swift */; };
 		4DC149A22BD617C4004FF0AB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */; };
 		4DC149A42BD617C4004FF0AB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC149A32BD617C4004FF0AB /* ViewController.swift */; };
@@ -21,8 +23,10 @@
 
 /* Begin PBXFileReference section */
 		116506CB2BD61905009E7525 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		116506CD2BD6218A009E7525 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		116506D22BD674DB009E7525 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		116D808C2BD8E873008E619C /* KickBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoard.swift; sourceTree = "<group>"; };
+		116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KickBoardAnnotation.swift; sourceTree = "<group>"; };
+		1179196F2BD7E76600401A45 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		4DC1499C2BD617C4004FF0AB /* 7ickboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 7ickboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DC1499F2BD617C4004FF0AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,7 +72,9 @@
 				4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */,
 				4DC149A32BD617C4004FF0AB /* ViewController.swift */,
 				116506CB2BD61905009E7525 /* MapViewController.swift */,
-				116506CD2BD6218A009E7525 /* MapView.swift */,
+				1179196F2BD7E76600401A45 /* RegisterViewController.swift */,
+				116D808C2BD8E873008E619C /* KickBoard.swift */,
+				116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */,
 				4DC149A52BD617C4004FF0AB /* Main.storyboard */,
 				4DC149A82BD617C5004FF0AB /* Assets.xcassets */,
 				4DC149AA2BD617C5004FF0AB /* LaunchScreen.storyboard */,
@@ -155,10 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116D808F2BD8FB42008E619C /* KickBoardAnnotation.swift in Sources */,
 				116506D32BD674DB009E7525 /* TabBarController.swift in Sources */,
 				4DC149A42BD617C4004FF0AB /* ViewController.swift in Sources */,
+				117919702BD7E76600401A45 /* RegisterViewController.swift in Sources */,
+				116D808D2BD8E873008E619C /* KickBoard.swift in Sources */,
 				4DC149A02BD617C4004FF0AB /* AppDelegate.swift in Sources */,
-				116506CE2BD6218A009E7525 /* MapView.swift in Sources */,
 				4DC149A22BD617C4004FF0AB /* SceneDelegate.swift in Sources */,
 				116506CC2BD61905009E7525 /* MapViewController.swift in Sources */,
 			);

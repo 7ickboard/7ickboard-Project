@@ -1,5 +1,6 @@
 
 import UIKit
+import SnapKit
 
 class TabBarController: UITabBarController {
 
@@ -23,6 +24,7 @@ class TabBarController: UITabBarController {
     func setUpVCs() {
         viewControllers = [
             createNavController(for: MapViewController(), title: NSLocalizedString("메인홈", comment: ""), image: UIImage(systemName: "circle")!),
+            createNavController(for: RegisterViewController(), title: NSLocalizedString("등록", comment: ""), image: UIImage(systemName: "triangle")!),
         ]
     }
 
@@ -32,6 +34,7 @@ class TabBarController: UITabBarController {
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
+
 //        navController.navigationBar.backgroundColor = MySpecialColors.cellGray
 //        navController.navigationBar.prefersLargeTitles = true
 //        rootViewController.navigationItem.title = title
