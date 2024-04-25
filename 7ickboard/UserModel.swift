@@ -14,6 +14,26 @@ final class UserModel {
         var name: String
         var telephone: String
         var driversLicense: Bool
+        var ridingTime: RidingTime?
+        
+        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil) {
+            self.id = id
+            self.password = password
+            self.name = name
+            self.telephone = telephone
+            self.driversLicense = driversLicense
+            self.ridingTime = ridingTime
+        }
+    }
+    
+    struct RidingTime: Codable {
+        var startTime: Date?
+        var endTime: Date?
+        
+        init(startTime: Date? = nil, endTime: Date? = nil) {
+            self.startTime = startTime
+            self.endTime = endTime
+        }
     }
     
     var users: [User]
