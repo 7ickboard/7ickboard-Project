@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signinButton: UIButton!
+    @IBOutlet weak var signupButton: UIButton!
     
     var userModel = UserModel()
     
@@ -19,7 +20,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setIdTextField()
         setPasswordTextField()
-        setSigninButton()
+        setButton()
         setIdPassword()
         hideKeyboard()
     }
@@ -35,9 +36,12 @@ class LoginViewController: UIViewController {
         passwordTextField.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
     }
     
-    func setSigninButton() {
-        signinButton.addTarget(self, action: #selector(didEndOnExit), for: UIControl.Event.editingDidEndOnExit)
+    func setButton() {
+        signinButton.layer.cornerRadius = 12
+        signupButton.layer.cornerRadius = 12
     }
+    
+    
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
 //         self.view.endEditing(true)

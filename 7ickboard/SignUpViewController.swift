@@ -16,12 +16,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var telephoneTextField: UITextField!
     @IBOutlet weak var licenseSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var signupButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextField()
         setSegmentedControl()
         hideKeyboard()
+        setBtn()
     }
     
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -40,6 +42,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         nameTextField.delegate = self
         telephoneTextField.delegate = self
         
+    }
+    
+    func setBtn() {
+        signupButton.layer.cornerRadius = 12
     }
     
     func setSegmentedControl() {
