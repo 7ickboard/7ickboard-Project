@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  7ickboard
-//
-//  Created by Kinam on 4/22/24.
-//
 
 import UIKit
 
@@ -32,6 +26,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+}
+
+extension UIViewController {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self,
+                                                                 action: #selector(UIViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 extension UIViewController {
