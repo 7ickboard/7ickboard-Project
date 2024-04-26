@@ -15,7 +15,7 @@ final class UserModel {
         var telephone: String
         var driversLicense: Bool
         var ridingTime: RidingTime?
-        var history: [History]
+        var history: [History]?
         
         init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil, history: [History]? = nil) {
             self.id = id
@@ -24,7 +24,7 @@ final class UserModel {
             self.telephone = telephone
             self.driversLicense = driversLicense
             self.ridingTime = ridingTime
-            self.history = (history)!
+            self.history = history
         }
     }
     

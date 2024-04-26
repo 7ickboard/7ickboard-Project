@@ -19,9 +19,9 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == historyTableView {
-            return array1.count
+            return UserModel.users[0].history?.count ?? 0 // UserModel.users의 첫번째 유저가 가지고 있는 history array의 개수 리턴필요
         } else if tableView == registeredTableView {
-            return array2.count
+            return KickBoard.kickboards.count
         }
         return kickboards.count
     }
@@ -31,18 +31,18 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
         if tableView == historyTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
 
-            let kickboard = kickboards[indexPath.row]
+//            let kickboard = KickBoard.kickboards[indexPath.row].name
 //            let users = self.userModel[indexPath.row]
 //            let id = users.name
 //            let title = users.telephone
 //                    cell.textLabel?.text = "[\(id)] \(title)"
-                    return cell
-     //       cell.titleLabel.text = userModel.users[indexPath.row]
-       // return cell
+                   
+            cell.titleLabel.text = UserModel.users[0].history?[indexPath.row].kickboardName ?? "유저가 없습니다"
+        return cell
         } else if tableView == registeredTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
-            let kickboard = kickboards[indexPath.row]
-            cell.titleLabel.text = array2[indexPath.row]
+            let kickboard = kickboards[indexPath.row].name
+            cell.titleLabel.text = kickboard
             return cell
         }
 
@@ -99,7 +99,9 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
     }
  
     @IBAction func logoutButton(_ sender: UIButton) {
-        guard let nextVC = self.storyboard?.instantiateViewController( identifier: "" ) else { return }
+        let storyboard = UIStoryboard(name: "AuthView", bundle: nil)
+        guard let nextVC = storyboard.instantiateViewController(identifier: "LoginView") as? LoginViewController else { return }
+        
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nextVC)
     }
 
