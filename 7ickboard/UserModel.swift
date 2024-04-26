@@ -88,4 +88,11 @@ final class UserModel {
         users = []
         save() // 변경사항을 저장
     }
+    
+    func updateRidingTime(forUserId userId: String, startTime: Date?, endTime: Date?) {
+        if let index = users.firstIndex(where: { $0.id == userId }) {
+            users[index].ridingTime = RidingTime(startTime: startTime, endTime: endTime)
+            save()
+        }
+    }
 }
