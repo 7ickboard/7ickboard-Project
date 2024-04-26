@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>허용</string>
+	<string>true</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>허용</string>
+	<string>true</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

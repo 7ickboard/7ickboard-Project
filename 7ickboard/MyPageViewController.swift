@@ -19,7 +19,7 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == historyTableView {
-            return UserModel.users[0].history?.count ?? 0 // UserModel.users의 첫번째 유저가 가지고 있는 history array의 개수 리턴필요
+            return UserModel.users[0].history.count// UserModel.users의 첫번째 유저가 가지고 있는 history array의 개수 리턴필요
         } else if tableView == registeredTableView {
             return KickBoard.kickboards.count
         }
@@ -37,7 +37,8 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
 //            let title = users.telephone
 //                    cell.textLabel?.text = "[\(id)] \(title)"
                    
-            cell.titleLabel.text = UserModel.users[0].history?[indexPath.row].kickboardName ?? "유저가 없습니다"
+            cell.titleLabel.text = "킥보드 - \(indexPath.row + 1)\t" + UserModel.users.first!.history[indexPath.row].formattedTime().0 + " ~ " + UserModel.users.first!.history[indexPath.row].formattedTime().1
+
         return cell
         } else if tableView == registeredTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }

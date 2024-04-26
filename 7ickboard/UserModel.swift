@@ -14,16 +14,14 @@ final class UserModel {
         var name: String
         var telephone: String
         var driversLicense: Bool
-        var ridingTime: RidingTime?
-        var history: [History]?
+        var history: [History]
         
-        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil, history: [History]? = nil) {
+        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, history: [History] = []) {
             self.id = id
             self.password = password
             self.name = name
             self.telephone = telephone
             self.driversLicense = driversLicense
-            self.ridingTime = ridingTime
             self.history = history
         }
     }
@@ -49,16 +47,6 @@ final class UserModel {
                 return (startTimeString, endTimeString)
             }
         
-    }
-    
-    struct RidingTime: Codable {
-        var startTime: Date?
-        var endTime: Date?
-        
-        init(startTime: Date? = nil, endTime: Date? = nil) {
-            self.startTime = startTime
-            self.endTime = endTime
-        }
     }
     
     static var users: [User] = []
@@ -101,13 +89,6 @@ final class UserModel {
     static func save() {
         if let encodedData = try? JSONEncoder().encode(UserModel.users) {
             UserDefaults.standard.set(encodedData, forKey: "userData")
-        }
-    }
-
-    static func updateRidingTime(forUserId userId: String, startTime: Date?, endTime: Date?) {
-        if let index = UserModel.users.firstIndex(where: { $0.id == userId }) {
-            UserModel.users[index].ridingTime = RidingTime(startTime: startTime, endTime: endTime)
-            save()
         }
     }
 

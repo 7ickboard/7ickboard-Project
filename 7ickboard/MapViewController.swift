@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
         }
     }
 
-    var ridingTime: (Date?, Date?)
+    var history: UserModel.History?
 
     var occupiedAnnotation: KickBoardAnnotation?
 
@@ -67,6 +67,8 @@ class MapViewController: UIViewController {
         setUpUI()
         setConstraints()
 
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         setupMapView()
         findMyLocation()
     }
@@ -141,11 +143,9 @@ class MapViewController: UIViewController {
         let annotation = KickBoardAnnotation(id: occupiedAnnotation!.id, coordinate: locationManager.location!.coordinate)
         KickBoard.kickboards.append(KickBoard(id: occupiedAnnotation!.id, name: "", latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude))
         isRiding = false
-        ridingTime.1 = Date()
 
-        //adding ridingTime to User
-        print(ridingTime)
-        UserModel.updateRidingTime(forUserId: UserModel.users[0].id, startTime: ridingTime.0, endTime: ridingTime.1)
+        history?.endTime = Date()
+        UserModel.users[0].history.append(history!)
 
         occupiedAnnotation = nil
 
@@ -158,7 +158,9 @@ class MapViewController: UIViewController {
         occupyingBicycleButton.removeFromSuperview()
         isRiding = true
 
-        ridingTime.0 = Date()
+        history = UserModel.History(startTime: Date(),
+                                    endTime: nil,
+                                    kickboardName: "")
 
         KickBoard.kickboards.remove(at: KickBoard.kickboards.firstIndex(where: { kickboard in
             kickboard.id == occupiedAnnotation!.id
@@ -255,7 +257,6 @@ extension MapViewController {
     }
 
     func goSetting() {
-
         let alert = UIAlertController(title: "위치권한 요청", message: "위치 권한이 필요합니다.", preferredStyle: .alert)
         let settingAction = UIAlertAction(title: "설정", style: .default) { action in
             guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -274,22 +275,20 @@ extension MapViewController {
     }
 
     func checkUserLocationServicesAuthorization() {
-        DispatchQueue.global().async {
-            if CLLocationManager.locationServicesEnabled() {
-                let authorization: CLAuthorizationStatus
+        if CLLocationManager.locationServicesEnabled() {
+            let authorization: CLAuthorizationStatus
 
-                if #available(iOS 15.0, *) {
-                    authorization = self.locationManager.authorizationStatus
-                } else {
-                    authorization = CLLocationManager.authorizationStatus()
-                }
-
-                print("현재 사용자의 authorization status: \(authorization)")
-
+            if #available(iOS 15.0, *) {
+                authorization = self.locationManager.authorizationStatus
             } else {
-                print("위치 권한 허용 꺼져있음")
+                authorization = CLLocationManager.authorizationStatus()
             }
+            print("현재 사용자의 authorization status: \(authorization)")
+
+        } else {
+            print("위치 권한 허용 꺼져있음")
         }
+
     }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
