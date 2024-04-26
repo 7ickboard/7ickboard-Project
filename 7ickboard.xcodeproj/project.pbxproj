@@ -91,27 +91,59 @@
 				4DC1499F2BD617C4004FF0AB /* AppDelegate.swift */,
 				4DC149A12BD617C4004FF0AB /* SceneDelegate.swift */,
 				4DC149A32BD617C4004FF0AB /* ViewController.swift */,
-				116506CB2BD61905009E7525 /* MapViewController.swift */,
-				1179196F2BD7E76600401A45 /* RegisterViewController.swift */,
-				116D808C2BD8E873008E619C /* KickBoard.swift */,
-				116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */,
-				116506D22BD674DB009E7525 /* TabBarController.swift */,
 				4DC149A52BD617C4004FF0AB /* Main.storyboard */,
 				4DC149A82BD617C5004FF0AB /* Assets.xcassets */,
 				4DC149AA2BD617C5004FF0AB /* LaunchScreen.storyboard */,
 				4DC149AD2BD617C5004FF0AB /* Info.plist */,
-				116D80912BDA55EA008E619C /* AuthView.storyboard */,
-				116D80922BDA55EA008E619C /* LoginViewController.swift */,
-				116D80932BDA55EA008E619C /* SignUpViewController.swift */,
-				116D80902BDA55EA008E619C /* UserModel.swift */,
-				116FF2F82BDB36B600736863 /* MyPageStoryboard.storyboard */,
-				116FF2F92BDB36B600736863 /* MyPageTableViewCell.swift */,
-				116FF2F72BDB36B600736863 /* MyPageTableViewCell.xib */,
-				116FF2F62BDB36B600736863 /* MyPageViewController.swift */,
-				116FF2FE2BDB3ABA00736863 /* KakaoZipCodeViewController.swift */,
-				116FF3002BDB4BA200736863 /* KakaoLocation.swift */,
+				4DDF1F632BDBDC1000A762FA /* Model */,
+				4DDF1F642BDBDC2800A762FA /* Contorller */,
+				4DDF1F652BDBDC3100A762FA /* View */,
 			);
 			path = 7ickboard;
+			sourceTree = "<group>";
+		};
+		4DDF1F632BDBDC1000A762FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				116D80902BDA55EA008E619C /* UserModel.swift */,
+				116D808C2BD8E873008E619C /* KickBoard.swift */,
+				116FF3002BDB4BA200736863 /* KakaoLocation.swift */,
+				116D808E2BD8FB42008E619C /* KickBoardAnnotation.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4DDF1F642BDBDC2800A762FA /* Contorller */ = {
+			isa = PBXGroup;
+			children = (
+				1179196F2BD7E76600401A45 /* RegisterViewController.swift */,
+				116506CB2BD61905009E7525 /* MapViewController.swift */,
+				116D80922BDA55EA008E619C /* LoginViewController.swift */,
+				116D80932BDA55EA008E619C /* SignUpViewController.swift */,
+				116FF2F62BDB36B600736863 /* MyPageViewController.swift */,
+				116FF2FE2BDB3ABA00736863 /* KakaoZipCodeViewController.swift */,
+				116506D22BD674DB009E7525 /* TabBarController.swift */,
+			);
+			path = Contorller;
+			sourceTree = "<group>";
+		};
+		4DDF1F652BDBDC3100A762FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4DDF1F662BDBDC4C00A762FA /* Cell */,
+				116D80912BDA55EA008E619C /* AuthView.storyboard */,
+				116FF2F82BDB36B600736863 /* MyPageStoryboard.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4DDF1F662BDBDC4C00A762FA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				116FF2F72BDB36B600736863 /* MyPageTableViewCell.xib */,
+				116FF2F92BDB36B600736863 /* MyPageTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
