@@ -34,6 +34,16 @@ final class UserModel {
             self.startTime = startTime
             self.endTime = endTime
         }
+        
+        func formattedTime() -> (String, String) {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm"
+
+                let startTimeString = startTime.map { formatter.string(from: $0) } ?? "00:00"
+                let endTimeString = endTime.map { formatter.string(from: $0) } ?? "00:00"
+
+                return (startTimeString, endTimeString)
+            }
     }
     
     var users: [User]
