@@ -26,7 +26,7 @@ class TabBarController: UITabBarController {
         viewControllers = [
             createNavController(for: MapViewController(), title: NSLocalizedString("메인홈", comment: ""), image: UIImage(systemName: "circle")!),
             createNavController(for: RegisterViewController(), title: NSLocalizedString("등록", comment: ""), image: UIImage(systemName: "triangle")!),
-            createNavController(for: myPageViewController, title: NSLocalizedString("등록", comment: ""), image: UIImage(systemName: "triangle")!),
+            createNavController(for: myPageViewController, title: NSLocalizedString("마이페이지", comment: ""), image: UIImage(systemName: "square")!),
         ]
     }
 

@@ -12,16 +12,13 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
     var userModel = UserModel()
 
     // KickBoard 객체의 배열 선언
-    var kickboards: [KickBoard] = []
-    
-
-
+    var kickboards = KickBoard.kickboards
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == historyTableView {
             return UserModel.users[0].history.count// UserModel.users의 첫번째 유저가 가지고 있는 history array의 개수 리턴필요
         } else if tableView == registeredTableView {
-            return KickBoard.kickboards.count
+            return kickboards.count
         }
         return kickboards.count
     }
@@ -30,25 +27,16 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
 
         if tableView == historyTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
-
-//            let kickboard = KickBoard.kickboards[indexPath.row].name
-//            let users = self.userModel[indexPath.row]
-//            let id = users.name
-//            let title = users.telephone
-//                    cell.textLabel?.text = "[\(id)] \(title)"
                    
             cell.titleLabel.text = "킥보드 - \(indexPath.row + 1)\t" + UserModel.users.first!.history[indexPath.row].formattedTime().0 + " ~ " + UserModel.users.first!.history[indexPath.row].formattedTime().1
 
         return cell
         } else if tableView == registeredTableView {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageTableViewCell", for: indexPath) as? MyPageTableViewCell else { return UITableViewCell() }
-            let kickboard = kickboards[indexPath.row].name
-            cell.titleLabel.text = kickboard
+            let kickboard = kickboards[indexPath.row]
+            cell.titleLabel.text = kickboard.name + "\(indexPath.row + 1)"
             return cell
         }
-
-
-
         return UITableViewCell()
     }
 
@@ -70,22 +58,12 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var registeredKickboardLabel: UILabel!
     @IBOutlet weak var registeredTableView: UITableView!
 
-    var array1 = ["1","2","3"]
-    var array2 = ["q","w","e","r"]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         historyTableView.register(UINib(nibName: "MyPageTableViewCell", bundle: nil), forCellReuseIdentifier: "MyPageTableViewCell")
         registeredTableView.register(UINib(nibName: "MyPageTableViewCell", bundle: nil), forCellReuseIdentifier: "MyPageTableViewCell")
         historyTableView.dataSource = self
         registeredTableView.dataSource = self
-        // KickBoard 객체 생성, kickboards 배열에 추가
-        let kickboard1 = KickBoard(name: "Kickboard 1", latitude: Double(), longitude: Double())
-        let kickboard2 = KickBoard(name: "Kickboard 2", latitude: Double(), longitude: Double())
-        kickboards = [kickboard1, kickboard2]
-        
-
-
 
         let a = UserModel.users[0]
 
@@ -98,6 +76,13 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
             licenseTextField.text = "미인증"
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        historyTableView.reloadData()
+        registeredTableView.reloadData()
+        kickboards = KickBoard.kickboards
+    }
  
     @IBAction func logoutButton(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "AuthView", bundle: nil)
@@ -105,6 +90,4 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
         
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(nextVC)
     }
-
-
 }

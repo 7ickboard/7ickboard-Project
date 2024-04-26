@@ -12,7 +12,7 @@ struct KickBoard {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 
-    init(id: UUID = UUID(), name: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+    init(id: UUID = UUID(), name: String = "킥보드", latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
         self.id = id
         self.name = name
         self.latitude = latitude
@@ -21,5 +21,5 @@ struct KickBoard {
 }
 
 extension KickBoard {
-    static var kickboards: [KickBoard] = [KickBoard(name: "자전거", latitude: 37.51818789942772, longitude: 126.88541765534976)]
+    static var kickboards: [KickBoard] = []
 }

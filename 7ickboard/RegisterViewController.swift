@@ -45,7 +45,7 @@ class RegisterViewController: UIViewController {
     }
 
     lazy var registerAction = UIAction { action in
-        KickBoard.kickboards.append(KickBoard(name: "1", latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude))
+        KickBoard.kickboards.append(KickBoard(latitude: self.locationManager.location!.coordinate.latitude, longitude: self.locationManager.location!.coordinate.longitude))
     }
 }
 
