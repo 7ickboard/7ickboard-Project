@@ -15,24 +15,28 @@ final class UserModel {
         var telephone: String
         var driversLicense: Bool
         var ridingTime: RidingTime?
+        var history: [History]
         
-        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil) {
+        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil, history: [History]? = nil) {
             self.id = id
             self.password = password
             self.name = name
             self.telephone = telephone
             self.driversLicense = driversLicense
             self.ridingTime = ridingTime
+            self.history = (history)!
         }
     }
     
-    struct RidingTime: Codable {
+    struct History: Codable {
         var startTime: Date?
         var endTime: Date?
+        var kickboardName: String
         
-        init(startTime: Date? = nil, endTime: Date? = nil) {
+        init(startTime: Date? = nil, endTime: Date? = nil, kickboardName: String) {
             self.startTime = startTime
             self.endTime = endTime
+            self.kickboardName = kickboardName
         }
         
         func formattedTime() -> (String, String) {
@@ -44,6 +48,17 @@ final class UserModel {
 
                 return (startTimeString, endTimeString)
             }
+        
+    }
+    
+    struct RidingTime: Codable {
+        var startTime: Date?
+        var endTime: Date?
+        
+        init(startTime: Date? = nil, endTime: Date? = nil) {
+            self.startTime = startTime
+            self.endTime = endTime
+        }
     }
     
     static var users: [User] = []
