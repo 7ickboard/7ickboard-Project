@@ -26,10 +26,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         setBtn()
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-//        self.view.endEditing(true)
-//    }
-    
     func setTextField() {
         idTextField.placeholder = "id를 입력해주세요"
         passwordTextField.placeholder = "비밀번호를 입력해주세요 (영대,소,특수문자 8~16자)"
@@ -98,11 +94,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             let selectedIndex = licenseSegmentedControl.selectedSegmentIndex
             let isLicensed = selectedIndex == 0 ? true : false
             let user = UserModel.User(id: id, password: pw, name: name, telephone: tp, driversLicense: isLicensed)
-            print(userModel.users)
             userModel.removeAllUsers()
-            print(userModel.users)
             userModel.addUser(user: user)
-            print(userModel.users)
             makeSuccessAlert()
         } else {
             makeSignUpCheckAlert()

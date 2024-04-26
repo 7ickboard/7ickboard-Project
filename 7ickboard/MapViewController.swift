@@ -6,6 +6,8 @@ import CoreLocation
 
 class MapViewController: UIViewController {
 
+    var address = ""
+
     var isRiding = false {
         willSet(newValue) {
             newValue ?
@@ -86,6 +88,8 @@ class MapViewController: UIViewController {
         view.addSubview(goToMyLocationButton)
         view.addSubview(containerStackView)
 
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "주소검색", style: .done, target: self, action: #selector(getAddress))
+
         goToMyLocationButton.addTarget(self, action: #selector(findMyLocation), for: .touchUpInside)
     }
 
@@ -109,6 +113,21 @@ class MapViewController: UIViewController {
     }
 
     @objc
+    func getAddress() {
+        let nextVC = KakaoZipCodeViewController()
+        nextVC.completioHandler = { str in
+            Task {
+                var address: KakaoLocation?
+
+                await address = self.getLocationByAddress(str)
+                await self.setSearchedRegion(address: address!)
+            }
+
+        }
+        present(nextVC, animated: true)
+    }
+
+    @objc
     func findMyLocation() {
         debugPrint(#function)
         mapView.showsUserLocation = true
@@ -125,6 +144,8 @@ class MapViewController: UIViewController {
         ridingTime.1 = Date()
 
         //adding ridingTime to User
+        print(ridingTime)
+        UserModel.updateRidingTime(forUserId: UserModel.users[0].id, startTime: ridingTime.0, endTime: ridingTime.1)
 
         occupiedAnnotation = nil
 
@@ -153,6 +174,48 @@ class MapViewController: UIViewController {
 
             mapView.addAnnotation(annotation)
         }
+    }
+
+    //Network
+    func getLocationByAddress(_ str: String) async -> KakaoLocation? {
+        // URLComponents를 사용하여 URL 구성
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "dapi.kakao.com"
+        urlComponents.path = "/v2/local/search/address"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "query", value: str)
+        ]
+
+        print(urlComponents.url!)
+
+        // URLRequest 인스턴스 생성
+        var request = URLRequest(url: urlComponents.url!)
+        request.httpMethod = "GET" // 요청에 사용할 HTTP 메서드 설정
+
+        // HTTP 헤더 설정
+        request.setValue("KakaoAK 624f6f4ad5f7f29ddc4ec56b4a6a4f3d", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            //디코딩까지 묶어서 작업한 뒤 리턴
+            let (data, _) = try await URLSession.shared.data(for: request)
+            print(data)
+            let address = try JSONDecoder().decode(KakaoLocation.self, from: data)
+
+            return address
+        }
+        catch {
+            debugPrint("Error loading : \(String(describing: error))")
+            return nil
+        }
+    }
+
+    func setSearchedRegion(address: KakaoLocation) async {
+        let coordinate = CLLocationCoordinate2D(latitude: Double(address.latitude!)!,
+                                                longitude: Double(address.longitude!)!)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+        mapView.setRegion(region, animated: true)
     }
 }
 
@@ -211,15 +274,21 @@ extension MapViewController {
     }
 
     func checkUserLocationServicesAuthorization() {
-        let authorizationStatus: CLAuthorizationStatus
-        if #available(iOS 15, *) {
-            authorizationStatus = locationManager.authorizationStatus
-        } else {
-            authorizationStatus = CLLocationManager.authorizationStatus()
-        }
+        DispatchQueue.global().async {
+            if CLLocationManager.locationServicesEnabled() {
+                let authorization: CLAuthorizationStatus
 
-        if CLLocationManager.locationServicesEnabled() {
-            checkCurrentLocationAuthorization(authorizationStatus: authorizationStatus)
+                if #available(iOS 15.0, *) {
+                    authorization = self.locationManager.authorizationStatus
+                } else {
+                    authorization = CLLocationManager.authorizationStatus()
+                }
+
+                print("현재 사용자의 authorization status: \(authorization)")
+
+            } else {
+                print("위치 권한 허용 꺼져있음")
+            }
         }
     }
 

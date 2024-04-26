@@ -42,12 +42,6 @@ class LoginViewController: UIViewController {
     }
     
     
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-//         self.view.endEditing(true)
-//   }
-    
-    
     @objc func didEndOnExit(_ sender: UITextField) {
         if idTextField.isFirstResponder {
             passwordTextField.becomeFirstResponder()
@@ -56,7 +50,7 @@ class LoginViewController: UIViewController {
     
     func loginCheck(id: String, pwd: String) -> Bool {
         let userModel = UserModel()
-        for user in userModel.users {
+        for user in UserModel.users {
             if user.id == id && user.password == pwd {
                 return true // 로그인 성공
             }
@@ -82,8 +76,7 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.set(id, forKey: "loggedInUserId")
                 UserDefaults.standard.set(password, forKey: "loggedInUserPassword")
 
-              let tabBarController = TabBarController()
-                    self.navigationController?.pushViewController(tabBarController, animated: true)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(TabBarController())
 
             } else {
                 print("로그인 실패")

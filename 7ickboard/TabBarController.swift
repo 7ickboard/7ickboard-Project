@@ -13,8 +13,6 @@ class TabBarController: UITabBarController {
     }
 
     func setUpTabBar() {
-//        tabBar.unselectedItemTintColor = MySpecialColors.gray
-//        tabBar.tintColor = MySpecialColors.tabBarTint
         tabBar.backgroundColor = .white
         tabBar.backgroundImage = UIImage()
         tabBar.shadowImage = UIImage()
@@ -22,9 +20,13 @@ class TabBarController: UITabBarController {
     }
 
     func setUpVCs() {
+        let storyboard = UIStoryboard(name: "MyPageStoryboard", bundle: .main)
+        let myPageViewController = storyboard.instantiateViewController(withIdentifier: "MyPageStoryboard") as! MyPageViewController
+
         viewControllers = [
             createNavController(for: MapViewController(), title: NSLocalizedString("메인홈", comment: ""), image: UIImage(systemName: "circle")!),
             createNavController(for: RegisterViewController(), title: NSLocalizedString("등록", comment: ""), image: UIImage(systemName: "triangle")!),
+            createNavController(for: myPageViewController, title: NSLocalizedString("등록", comment: ""), image: UIImage(systemName: "triangle")!),
         ]
     }
 
@@ -35,9 +37,6 @@ class TabBarController: UITabBarController {
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
 
-//        navController.navigationBar.backgroundColor = MySpecialColors.cellGray
-//        navController.navigationBar.prefersLargeTitles = true
-//        rootViewController.navigationItem.title = title
         return navController
     }
 }

@@ -15,15 +15,40 @@ final class UserModel {
         var telephone: String
         var driversLicense: Bool
         var ridingTime: RidingTime?
+        var history: [History]
         
-        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil) {
+        init(id: String, password: String, name: String, telephone: String, driversLicense: Bool, ridingTime: RidingTime? = nil, history: [History]? = nil) {
             self.id = id
             self.password = password
             self.name = name
             self.telephone = telephone
             self.driversLicense = driversLicense
             self.ridingTime = ridingTime
+            self.history = (history)!
         }
+    }
+    
+    struct History: Codable {
+        var startTime: Date?
+        var endTime: Date?
+        var kickboardName: String
+        
+        init(startTime: Date? = nil, endTime: Date? = nil, kickboardName: String) {
+            self.startTime = startTime
+            self.endTime = endTime
+            self.kickboardName = kickboardName
+        }
+        
+        func formattedTime() -> (String, String) {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "HH:mm"
+
+                let startTimeString = startTime.map { formatter.string(from: $0) } ?? "00:00"
+                let endTimeString = endTime.map { formatter.string(from: $0) } ?? "00:00"
+
+                return (startTimeString, endTimeString)
+            }
+        
     }
     
     struct RidingTime: Codable {
@@ -36,18 +61,18 @@ final class UserModel {
         }
     }
     
-    var users: [User]
-    
+    static var users: [User] = []
+
     init() {
         // UserDefaults에서 저장된 사용자 데이터를 불러오기
         if let userData = UserDefaults.standard.data(forKey: "userData") {
             if let decodedData = try? JSONDecoder().decode([User].self, from: userData) {
-                self.users = decodedData
+                UserModel.users = decodedData
                 return
             }
         }
         // 저장된 사용자 데이터가 없을 경우, 기본값 설정
-        self.users = [
+        UserModel.users = [
             User(id: "test1234", password: "test1234", name: "test" , telephone: "010-1234-5678", driversLicense: true)
         ]
     }
@@ -68,24 +93,31 @@ final class UserModel {
     
     // 회원 추가
     func addUser(user: User) {
-        users.append(user)
-        save() // 변경사항을 저장
+        UserModel.users.append(user)
+        UserModel.save() // 변경사항을 저장
     }
     
     // 사용자 데이터를 UserDefaults에 저장
-    func save() {
-        if let encodedData = try? JSONEncoder().encode(users) {
+    static func save() {
+        if let encodedData = try? JSONEncoder().encode(UserModel.users) {
             UserDefaults.standard.set(encodedData, forKey: "userData")
         }
     }
-    
+
+    static func updateRidingTime(forUserId userId: String, startTime: Date?, endTime: Date?) {
+        if let index = UserModel.users.firstIndex(where: { $0.id == userId }) {
+            UserModel.users[index].ridingTime = RidingTime(startTime: startTime, endTime: endTime)
+            save()
+        }
+    }
+
     func removeUser(withId id: String) {
-        users = users.filter { $0.id != id }
-        save() // 변경사항을 저장
+        UserModel.users = UserModel.users.filter { $0.id != id }
+        UserModel.save() // 변경사항을 저장
     }
     
     func removeAllUsers() {
-        users = []
-        save() // 변경사항을 저장
+        UserModel.users = []
+        UserModel.save() // 변경사항을 저장
     }
 }
