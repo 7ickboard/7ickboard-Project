@@ -141,7 +141,7 @@ class MapViewController: UIViewController {
         debugPrint(#function)
 
         let annotation = KickBoardAnnotation(id: occupiedAnnotation!.id, coordinate: locationManager.location!.coordinate)
-        KickBoard.kickboards.append(KickBoard(id: occupiedAnnotation!.id, name: "", latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude))
+        KickBoard.kickboards.append(KickBoard(id: occupiedAnnotation!.id, latitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude))
         isRiding = false
 
         history?.endTime = Date()

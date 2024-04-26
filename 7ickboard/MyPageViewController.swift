@@ -79,9 +79,10 @@ class MyPageViewController: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        kickboards = KickBoard.kickboards
         historyTableView.reloadData()
         registeredTableView.reloadData()
-        kickboards = KickBoard.kickboards
+        
     }
  
     @IBAction func logoutButton(_ sender: UIButton) {
