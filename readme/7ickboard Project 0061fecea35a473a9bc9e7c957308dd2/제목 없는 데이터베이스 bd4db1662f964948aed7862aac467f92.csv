@@ -1,0 +1,19 @@
+﻿속성,Person in Charge
+RegisterViewController,서수영
+MyPageTableViewCell,박충건
+Model,
+UserModel,방기남
+KickBoard,서수영
+KakaoLocation,서수영
+KickBoardAnnotation,서수영
+Controller,
+LoginViewController,방기남
+SignUpViewController,방기남
+MapViewController,서수영
+TabBarController,서수영
+KakaoZipCodeViewController,서수영
+MyPageViewController,박충건
+View,
+AuthView,방기남
+MyPageStoryboard,박충건
+Cell,
